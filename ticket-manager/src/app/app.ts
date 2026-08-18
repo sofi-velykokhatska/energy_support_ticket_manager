@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { TicketList } from './ticket-list/ticket-list';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [TicketList],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('ticket-manager');
+  // ...whatever was already here, leave it
 }
