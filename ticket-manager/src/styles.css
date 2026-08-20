@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --color-bg: #F3EEE7;        /* warm beige canvas */
+  --color-surface: #FFFFFF;   /* white cards/tables sit on the beige */
+  --color-text: #1A1A1A;      /* near-black text */
+  --color-muted: #6B6B6B;     /* secondary/grey text */
+  --color-blue: #A9C7E0;      /* soft blue accent */
+  --color-green: #C8DEC0;     /* soft sage green accent */
+  --color-border: #E2DBD1;    /* hairline divider on beige */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 24px;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
