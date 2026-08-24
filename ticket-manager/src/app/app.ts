@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { TicketList } from './ticket-list/ticket-list';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [TicketList],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  // ...whatever was already here, leave it
+  // leave any existing class body as-is
 }
