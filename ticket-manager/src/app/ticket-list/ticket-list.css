@@ -7,3 +7,17 @@ table {
   overflow: hidden;
   padding: 8px;
 }
+
+.product-badge {
+  display: inline-block;
+  width: 160px;
+  padding: 6px 6px;
+  font-size: 14px;
+  text-align: center;
+  color: #1A1A1A;
+  border-radius: 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

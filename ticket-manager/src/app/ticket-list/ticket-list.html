@@ -2,6 +2,17 @@
 
 <table mat-table [dataSource]="tickets" class="mat-elevation-z2">
 
+  <ng-container matColumnDef="product">
+    <th mat-header-cell *matHeaderCellDef>Product</th>
+    <td mat-cell *matCellDef="let ticket">
+      @if (getProduct(ticket.productId); as product) {
+        <span class="product-badge" [style.background-color]="product.color">
+          {{ product.name }}
+        </span>
+      }
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="subject">
     <th mat-header-cell *matHeaderCellDef>Subject</th>
     <td mat-cell *matCellDef="let ticket">{{ ticket.subject }}</td>

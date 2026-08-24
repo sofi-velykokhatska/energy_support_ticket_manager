@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Ticket } from './ticket';
 
+export interface Product {
+  productId: number;
+  name: string;
+  color: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class TicketDataService {
+
+  private products: Product[] = [
+    { productId: 1, name: 'B2C Electricity',                color: '#d5ecff' },
+    { productId: 2, name: 'E-Mobility',                     color: '#fef1dd' },
+    { productId: 3, name: 'Solar Panels',                   color: '#daefd2' },
+    { productId: 4, name: 'Smart Home / Energy Management', color: '#d2cae5' }
+  ];
 
   private tickets: Ticket[] = [
     {
@@ -31,7 +44,7 @@ export class TicketDataService {
     },
     {
       ticketId: 3,
-      productId: 4,
+      productId: 3,
       categoryId: 8,
       subject: 'Solar panel output low',
       body: 'Customer says energy production dropped after installation.',
@@ -44,5 +57,13 @@ export class TicketDataService {
 
   getTickets(): Ticket[] {
     return this.tickets;
+  }
+
+  getProducts(): Product[] {
+    return this.products;
+  }
+
+  getProductById(id: number): Product | undefined {
+    return this.products.find(p => p.productId === id);
   }
 }
