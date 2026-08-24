@@ -15,8 +15,8 @@ export class TicketDataService {
   private products: Product[] = [
     { productId: 1, name: 'B2C Electricity',                color: '#d5ecff' },
     { productId: 2, name: 'E-Mobility',                     color: '#fef1dd' },
-    { productId: 3, name: 'Solar Panels',                   color: '#daefd2' },
-    { productId: 4, name: 'Smart Home / Energy Management', color: '#d2cae5' }
+    { productId: 3, name: 'Solar',                   color: '#daefd2' },
+    { productId: 4, name: 'Smart Home', color: '#d2cae5' }
   ];
 
   private tickets: Ticket[] = [
