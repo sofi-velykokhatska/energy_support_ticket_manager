@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { TicketDataService, Product, Category } from '../ticket-data';
 import { Ticket } from '../ticket';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-ticket-list',
-  imports: [MatTableModule],
+   imports: [MatTableModule, RouterLink, MatButtonModule],
   templateUrl: './ticket-list.html',
   styleUrl: './ticket-list.css'
 })
