@@ -188,4 +188,14 @@ export class TicketDataService {
     this.tickets = this.tickets.filter(t => t.ticketId !== ticketId);
   }
 
+    getTicketById(ticketId: number): Ticket | undefined {
+        return this.tickets.find(t => t.ticketId === ticketId);
+  }
+    updateTicket(updated: Ticket): void {
+        const index = this.tickets.findIndex(t => t.ticketId === updated.ticketId);
+        if (index !== -1) {
+        this.tickets[index] = updated;
+        }
+    }
+
 }

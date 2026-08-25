@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TicketDataService, Product, Category } from '../ticket-data';
-import { Router } from '@angular/router'; 
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-form',
@@ -24,17 +24,19 @@ export class TicketForm {
   products: Product[] = [];
   filteredCategories: Category[] = [];
   ticketForm;
+  editingId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private ticketData: TicketDataService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.products = this.ticketData.getProducts();
 
     this.ticketForm = this.fb.group({
-      productId: [null, Validators.required],
-      categoryId: [null, Validators.required],
+      productId: [null as number | null, Validators.required],
+      categoryId: [null as number | null, Validators.required],
       subject: ['', Validators.required],
       body: ['', Validators.required],
       priority: ['medium', Validators.required],
@@ -47,26 +49,55 @@ export class TicketForm {
       } else {
         this.filteredCategories = [];
       }
-      this.ticketForm.get('categoryId')!.setValue(null);
     });
 
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.editingId = Number(idParam);
+      const ticket = this.ticketData.getTicketById(this.editingId);
+      if (ticket) {
+        this.filteredCategories = this.ticketData.getCategoriesByProduct(ticket.productId);
+        this.ticketForm.patchValue({
+          productId: ticket.productId,
+          categoryId: ticket.categoryId,
+          subject: ticket.subject,
+          body: ticket.body,
+          priority: ticket.priority,
+          status: ticket.status
+        });
+      }
+    }
   }
+
 
   onSubmit() {
     if (this.ticketForm.valid) {
       const v = this.ticketForm.value;
-      this.ticketData.addTicket({
-        productId: v.productId!,
-        categoryId: v.categoryId!,
-        subject: v.subject!,
-        body: v.body!,
-        priority: v.priority! as 'low' | 'medium' | 'high' | 'urgent',
-        status: v.status! as 'open' | 'in_progress' | 'resolved'
-      });
+      if (this.editingId !== null) {
+        this.ticketData.updateTicket({
+          ticketId: this.editingId,
+          productId: v.productId!,
+          categoryId: v.categoryId!,
+          subject: v.subject!,
+          body: v.body!,
+          priority: v.priority! as 'low' | 'medium' | 'high' | 'urgent',
+          status: v.status! as 'open' | 'in_progress' | 'resolved',
+          createdAt: this.ticketData.getTicketById(this.editingId)!.createdAt,
+          resolvedAt: this.ticketData.getTicketById(this.editingId)!.resolvedAt
+        });
+      } else {
+        this.ticketData.addTicket({
+          productId: v.productId!,
+          categoryId: v.categoryId!,
+          subject: v.subject!,
+          body: v.body!,
+          priority: v.priority! as 'low' | 'medium' | 'high' | 'urgent',
+          status: v.status! as 'open' | 'in_progress' | 'resolved'
+        });
+      }
       this.router.navigate(['/tickets']);
     } else {
       this.ticketForm.markAllAsTouched();
     }
   }
-
 }
