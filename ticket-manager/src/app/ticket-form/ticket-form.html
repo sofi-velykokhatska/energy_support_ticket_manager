@@ -1,4 +1,4 @@
-<h2>New Ticket</h2>
+<h2>{{ editingId ? 'Edit Ticket' : 'New Ticket' }}</h2>
 
 <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
 
@@ -50,6 +50,8 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit">Create Ticket</button>
+  <button mat-flat-button color="primary" type="submit">
+    {{ editingId ? 'Update Ticket' : 'Create Ticket' }}
+  </button>
 
 </form>
