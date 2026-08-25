@@ -1,0 +1,16 @@
+.ticket-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 480px;
+}
+
+.ticket-form mat-form-field {
+  width: 100%;
+}
+
+.ticket-form button {
+  align-self: flex-start;
+  margin-top: 8px;
+  border-radius: 0;
+}

@@ -1,2 +1,46 @@
 <h2>New Ticket</h2>
-<p>Form goes here.</p>
+
+<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Product</mat-label>
+    <mat-select formControlName="productId">
+      @for (product of products; track product.productId) {
+        <mat-option [value]="product.productId">{{ product.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Subject</mat-label>
+    <input matInput formControlName="subject" placeholder="Short summary of the call">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="body" rows="4"
+              placeholder="What the customer reported"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Priority</mat-label>
+    <mat-select formControlName="priority">
+      <mat-option value="low">Low</mat-option>
+      <mat-option value="medium">Medium</mat-option>
+      <mat-option value="high">High</mat-option>
+      <mat-option value="urgent">Urgent</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="open">Open</mat-option>
+      <mat-option value="in_progress">In Progress</mat-option>
+      <mat-option value="resolved">Resolved</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">Create Ticket</button>
+
+</form>
