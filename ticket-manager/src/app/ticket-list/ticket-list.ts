@@ -6,6 +6,8 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; 
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-ticket-list',
@@ -18,7 +20,10 @@ export class TicketList {
   tickets: Ticket[] = [];
   displayedColumns: string[] = ['product', 'category', 'subject', 'status', 'priority', 'createdAt', 'actions'];
 
-  constructor(private ticketData: TicketDataService) {
+  constructor(
+    private ticketData: TicketDataService,
+    private dialog: MatDialog
+  ) {
     this.tickets = this.ticketData.getTickets();
   }
 
@@ -32,8 +37,14 @@ export class TicketList {
   }
 
   onDelete(ticketId: number): void {
-    this.ticketData.deleteTicket(ticketId);
-    this.tickets = this.ticketData.getTickets();
+    const dialogRef = this.dialog.open(ConfirmDialog);
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.ticketData.deleteTicket(ticketId);
+        this.tickets = this.ticketData.getTickets();
+      }
+    });
   }
 
   getPriorityColor(priority: string): string {
