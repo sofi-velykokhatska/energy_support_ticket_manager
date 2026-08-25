@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TicketDataService, Product, Category } from '../ticket-data';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-ticket-form',
@@ -26,7 +27,8 @@ export class TicketForm {
 
   constructor(
     private fb: FormBuilder,
-    private ticketData: TicketDataService
+    private ticketData: TicketDataService,
+    private router: Router
   ) {
     this.products = this.ticketData.getProducts();
 
@@ -52,9 +54,19 @@ export class TicketForm {
 
   onSubmit() {
     if (this.ticketForm.valid) {
-      console.log('Form values:', this.ticketForm.value);
+      const v = this.ticketForm.value;
+      this.ticketData.addTicket({
+        productId: v.productId!,
+        categoryId: v.categoryId!,
+        subject: v.subject!,
+        body: v.body!,
+        priority: v.priority! as 'low' | 'medium' | 'high' | 'urgent',
+        status: v.status! as 'open' | 'in_progress' | 'resolved'
+      });
+      this.router.navigate(['/tickets']);
     } else {
-      console.log('Form is invalid');
+      this.ticketForm.markAllAsTouched();
     }
   }
+
 }

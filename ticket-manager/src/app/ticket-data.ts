@@ -172,4 +172,16 @@ export class TicketDataService {
   getProductById(id: number): Product | undefined {
     return this.products.find(p => p.productId === id);
   }
+
+  addTicket(newTicket: Omit<Ticket, 'ticketId' | 'createdAt' | 'resolvedAt'>): Ticket {
+    const ticket: Ticket = {
+      ...newTicket,
+      ticketId: this.tickets.length + 1,
+      createdAt: new Date().toISOString(),
+      resolvedAt: null
+    };
+    this.tickets.push(ticket);
+    return ticket;
+  }
+  
 }
