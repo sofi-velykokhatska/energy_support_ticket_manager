@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { TicketDataService, Product } from '../ticket-data';
+import { TicketDataService, Product, Category } from '../ticket-data';
 
 @Component({
   selector: 'app-ticket-form',
@@ -21,6 +21,7 @@ import { TicketDataService, Product } from '../ticket-data';
 
 export class TicketForm {
   products: Product[] = [];
+  filteredCategories: Category[] = [];
   ticketForm;
 
   constructor(
@@ -31,11 +32,22 @@ export class TicketForm {
 
     this.ticketForm = this.fb.group({
       productId: [null, Validators.required],
+      categoryId: [null, Validators.required],
       subject: ['', Validators.required],
       body: ['', Validators.required],
       priority: ['medium', Validators.required],
       status: ['open', Validators.required]
     });
+
+    this.ticketForm.get('productId')!.valueChanges.subscribe(productId => {
+      if (productId) {
+        this.filteredCategories = this.ticketData.getCategoriesByProduct(productId);
+      } else {
+        this.filteredCategories = [];
+      }
+      this.ticketForm.get('categoryId')!.setValue(null);
+    });
+
   }
 
   onSubmit() {
