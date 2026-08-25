@@ -4,17 +4,18 @@ import { TicketDataService, Product, Category } from '../ticket-data';
 import { Ticket } from '../ticket';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'; 
 
 @Component({
   selector: 'app-ticket-list',
-   imports: [MatTableModule, RouterLink, MatButtonModule],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './ticket-list.html',
   styleUrl: './ticket-list.css'
 })
 
 export class TicketList {
   tickets: Ticket[] = [];
-  displayedColumns: string[] = ['product', 'category', 'subject', 'status', 'priority', 'createdAt'];
+  displayedColumns: string[] = ['product', 'category', 'subject', 'status', 'priority', 'createdAt', 'actions'];
 
   constructor(private ticketData: TicketDataService) {
     this.tickets = this.ticketData.getTickets();
@@ -27,6 +28,11 @@ export class TicketList {
   getCategoryName(categoryId: number): string {
     const category = this.ticketData.getCategories().find((c: Category) => c.categoryId === categoryId);
     return category ? category.name : '—';
+  }
+
+  onDelete(ticketId: number): void {
+    this.ticketData.deleteTicket(ticketId);
+    this.tickets = this.ticketData.getTickets();
   }
 
 }

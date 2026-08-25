@@ -122,7 +122,7 @@ export class TicketDataService {
       ticketId: 4,
       productId: 1,               // B2C Electricity
       categoryId: 3,              // Change monthly installment (Abschlag)
-      subject: 'Wants to lower monthly Abschlag',
+      subject: 'Wants to lower monthly installment',
       body: 'Customer asks to reduce the monthly installment after moving to a smaller flat.',
       status: 'open',
       priority: 'low',
@@ -183,5 +183,9 @@ export class TicketDataService {
     this.tickets.push(ticket);
     return ticket;
   }
-  
+
+  deleteTicket(ticketId: number): void {
+    this.tickets = this.tickets.filter(t => t.ticketId !== ticketId);
+  }
+
 }
