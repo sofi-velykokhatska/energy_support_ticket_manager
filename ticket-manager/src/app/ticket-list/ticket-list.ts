@@ -36,4 +36,14 @@ export class TicketList {
     this.tickets = this.ticketData.getTickets();
   }
 
+  getPriorityColor(priority: string): string {
+    switch (priority) {
+      case 'low':    return '#bbefba';  
+      case 'medium': return '#e9f4b6';  
+      case 'high':   return '#fbfbb9';  
+      case 'urgent': return '#ffdfb1';  
+      default:       return '#fabead';  
+    }
+  }
+
 }

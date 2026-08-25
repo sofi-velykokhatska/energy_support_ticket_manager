@@ -22,6 +22,19 @@ table {
   text-overflow: ellipsis;
 }
 
+.priority-badge {
+  display: inline-block;
+  width: 90px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: capitalize;
+  color: #1A1A1A;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
 .list-header {
   display: flex;
   justify-content: space-between;
