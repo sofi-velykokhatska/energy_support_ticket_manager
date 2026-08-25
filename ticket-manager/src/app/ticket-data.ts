@@ -161,6 +161,14 @@ export class TicketDataService {
     return this.products;
   }
 
+  getCategories(): Category[] {
+    return this.categories;
+  }
+
+  getCategoriesByProduct(productId: number): Category[] {
+    return this.categories.filter(c => c.productId === productId);
+  }
+
   getProductById(id: number): Product | undefined {
     return this.products.find(p => p.productId === id);
   }
