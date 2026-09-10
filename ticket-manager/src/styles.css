@@ -21,3 +21,31 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: -0.01em;
 }
+
+/* Sleek translucent beige buttons: 
+/* Material's own button styles are quite specific and would otherwise override yours - 
+SO using important! */ 
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-flat-button,
+button[mat-flat-button],
+a[mat-flat-button] {
+  background-color: rgba(243, 238, 231, 0.55) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  font-weight: 600;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mat-mdc-raised-button:hover,
+.mat-mdc-unelevated-button:hover,
+.mat-mdc-flat-button:hover,
+button[mat-flat-button]:hover,
+a[mat-flat-button]:hover {
+  background-color: rgba(243, 238, 231, 0.8) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
