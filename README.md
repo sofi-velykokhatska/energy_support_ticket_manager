@@ -1,4 +1,4 @@
-# Energy Support Ticket Manager - Side hustle In Progress
+# Energy Support Ticket Manager - Frontend Learning In Progress
 
 Ticket management system for energy companies to organize, prioritize, and resolve customer support requests efficiently. The goal is to train in frontend UI development and state management (using **Angular**)
 
@@ -13,7 +13,7 @@ The Energy Support Ticket Manager streamlines customer support operations by pro
 - **Intelligent Categorization** - Organize tickets by complaint type and intent
 - **Priority Management** - Track tickets by priority levels (low, medium, high, urgent)
 - **Status Tracking** - Monitor ticket lifecycle (open → in progress → resolved)
-- **Structured Data Model** - Clean, normalized database schema for scalability
+
 
 ## Database Schema
 
